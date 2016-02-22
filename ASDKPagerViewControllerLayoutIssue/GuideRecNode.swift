@@ -8,18 +8,18 @@
 
 import AsyncDisplayKit
 
-final class GuideRecScrollNode: ASScrollNode {
-	let recNode: GuideRecNode
-	init(rec: Rec) {
-		recNode = GuideRecNode(rec: rec)
-		super.init()
-		usesImplicitHierarchyManagement = true
-	}
-
-	override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
-		return ASInsetLayoutSpec(insets: UIEdgeInsetsZero, child: recNode)
-	}
-}
+//final class GuideRecScrollNode: ASScrollNode {
+//	let recNode: GuideRecNode
+//	init(rec: Rec) {
+//		recNode = GuideRecNode(rec: rec)
+//		super.init()
+//		usesImplicitHierarchyManagement = true
+//	}
+//
+//	override func layoutSpecThatFits(constrainedSize: ASSizeRange) -> ASLayoutSpec {
+//		return ASInsetLayoutSpec(insets: UIEdgeInsetsZero, child: recNode)
+//	}
+//}
 
 final class GuideRecNode: ASDisplayNode {
 	let imageNode = ASMultiplexImageNode()
@@ -30,7 +30,10 @@ final class GuideRecNode: ASDisplayNode {
 	let captionNode = ASTextNode()
 
 	init(rec: Rec) {
-		super.init()
+
+		/// Have to use `viewBlock` here to support this as ASViewController.node
+		super.init(viewBlock: { UIView() }, didLoadBlock: nil)
+
 		usesImplicitHierarchyManagement = true
 		captionNode.attributedString = rec.caption?.attributed(GuideStyle.captionAttr)
 		titleNode.attributedString = rec.poi.name.attributed(GuideStyle.poiNameAttr)

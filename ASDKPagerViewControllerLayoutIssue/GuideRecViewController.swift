@@ -14,17 +14,17 @@ final class GuideRecViewController: ASViewController {
 	}
 	var state: State
 
-	var scrollNode: GuideRecScrollNode {
-		return node as! GuideRecScrollNode
-	}
+//	var scrollNode: GuideRecScrollNode {
+//		return node as! GuideRecScrollNode
+//	}
 
 	var recNode: GuideRecNode {
-		return scrollNode.recNode
+		return node as! GuideRecNode
 	}
 
 	init(rec: Rec) {
 		self.state = State(rec: rec)
-		super.init(node: GuideRecScrollNode(rec: rec))
+		super.init(node: GuideRecNode(rec: rec))
 	}
 
 	required init?(coder aDecoder: NSCoder) {
